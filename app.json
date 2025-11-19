@@ -1,0 +1,15 @@
+{
+  "expo": {
+    "name": "Coroa das Lágrimas",
+    "slug": "coroa-das-lagrimas",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "entryPoint": "./index.js",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "plugins": [
+      "expo-font"
+    ]
+  }
+}
