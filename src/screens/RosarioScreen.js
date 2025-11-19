@@ -11,6 +11,7 @@ import { gerarSequencia } from "../data/oracoes";
 import { incDias } from "../utils/storage";
 import * as Haptics from "expo-haptics";
 import { LinearGradient } from "expo-linear-gradient";
+import AdBanner from "../components/AdBanner";
 
 export default function RosarioScreen({ navigation }) {
   const seq = gerarSequencia();
@@ -170,6 +171,9 @@ export default function RosarioScreen({ navigation }) {
         </Animated.View>
 
       </View>
+
+      {/* Banner Ad */}
+      <AdBanner />
     </LinearGradient>
   );
 }
