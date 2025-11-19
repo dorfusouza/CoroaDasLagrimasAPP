@@ -16,6 +16,8 @@ import AdBanner from "../components/AdBanner";
 export default function RosarioScreen({ navigation }) {
   const seq = gerarSequencia();
   const [index, setIndex] = useState(0);
+  const [bannerHeight, setBannerHeight] = useState(55); // valor padrão
+
 
   const etapa = seq[index];
 
@@ -146,7 +148,12 @@ export default function RosarioScreen({ navigation }) {
       </ScrollView>
 
       {/* Botões fixos */}
-      <View style={styles.fixedControls}>
+      <View
+        style={[
+          styles.fixedControls,
+          { bottom: bannerHeight + 20 } // posição ajustada automaticamente
+        ]}
+      >
         <Animated.View style={{ transform: [{ scale }] }}>
           <TouchableOpacity
             onPressIn={pressIn}
@@ -172,8 +179,16 @@ export default function RosarioScreen({ navigation }) {
 
       </View>
 
-      {/* Banner Ad */}
-      <AdBanner />
+      {/* Banner fixo no rodapé */}
+      <View
+        style={styles.bannerContainer}
+        onLayout={event => {
+          const h = event.nativeEvent.layout.height;
+          if (h > 0 && h !== bannerHeight) setBannerHeight(h);
+        }}
+      >
+        <AdBanner />
+      </View>
     </LinearGradient>
   );
 }
@@ -259,12 +274,14 @@ const styles = StyleSheet.create({
 
   fixedControls: {
     position: "absolute",
-    bottom: 30,
+    bottom: 100,
     width: "100%",
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    gap: 50,
+    gap: 40,
+    zIndex: 20,
+    elevation: 20,
   },
 
   baseButton: {
@@ -307,5 +324,12 @@ const styles = StyleSheet.create({
     color: "#4B1C56",
     fontWeight: "900"
   },
+  bannerContainer: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+    zIndex: 10
+  }
+
 
 });

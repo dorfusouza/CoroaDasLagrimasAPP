@@ -4,18 +4,16 @@
     "slug": "coroa-das-lagrimas",
     "version": "1.0.0",
     "orientation": "portrait",
-    "entryPoint": "./index.js",
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "plugins": [
-      "expo-font"
-    ],
+    "assetBundlePatterns": ["**/*"],
+    "plugins": ["expo-font"],
     "android": {
-      "googleMobileAdsAppId": "ca-app-pub-3940256099942544~3347511713" 
+      "package": "com.dorfusouza.coroadaslagrimas"
     },
-    "ios": {
-      "googleMobileAdsAppId": "ca-app-pub-3940256099942544~1458002511"
-    }
+    "extra": {
+      "eas": {
+        "projectId": "f795f7e3-13f1-4c4d-9eb7-bd034e700d97"
+      }
+    },
+    "owner": "dorfusouza"
   }
 }
