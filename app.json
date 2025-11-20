@@ -12,7 +12,6 @@
     },
     "assetBundlePatterns": ["**/*"],
     "plugins": [
-      "expo-font",
       [
         "expo-ads-admob",
         {
