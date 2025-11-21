@@ -52,7 +52,7 @@ export default function HomeScreen({ navigation }) {
           >
             <Text style={styles.buttonText}>Orações</Text>
           </TouchableOpacity>
-          
+
           <TouchableOpacity
             style={styles.linkButton}
             onPress={() => navigation.navigate("Historia")}
@@ -111,4 +111,19 @@ const styles = StyleSheet.create({
     color: COLORS.branco,
     fontWeight: "bold",
   },
+  linkButton: {
+    marginTop: 20,
+    backgroundColor: "#3B4C97cc",
+    paddingVertical: 14,
+    paddingHorizontal: 30,
+    borderRadius: 30,
+  },
+
+  linkText: {
+    color: "#fff",
+    fontSize: 18,
+    textAlign: "center",
+    fontWeight: "bold",
+  },
+
 });
