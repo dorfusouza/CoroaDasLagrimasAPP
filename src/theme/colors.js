@@ -3,5 +3,6 @@ export const COLORS = {
   azul: "#1A3EAD",
   branco: "#FFFFFF",
   fundo: "#F8F5FF",
-  acesa: "#FFE066"
+  acesa: "#FFE066",
+  preto: "#000000",
 };
