@@ -38,12 +38,21 @@ export default function HomeScreen({ navigation }) {
           >
             <Text style={styles.buttonText}>Iniciar</Text>
           </TouchableOpacity>
+          
           <TouchableOpacity
             style={[styles.button, { marginTop: 20, backgroundColor: "#4B1C56" }]}
             onPress={() => navigation.navigate("Devocionario")}
           >
             <Text style={styles.buttonText}>Devocionário</Text>
           </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.button, { marginTop: 20, backgroundColor: "#4B1C56" }]}
+            onPress={() => navigation.navigate("Oracoes")}
+          >
+            <Text style={styles.buttonText}>Orações</Text>
+          </TouchableOpacity>
+
 
         </View>
       </ImageBackground>
