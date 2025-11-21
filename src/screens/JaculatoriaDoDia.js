@@ -1,12 +1,20 @@
-import React from "react";
-import { Text, StyleSheet, ScrollView } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Text, StyleSheet, ScrollView, ActivityIndicator } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { JACULATORIAS } from "../data/devocionario/jaculatorias";
+import { getJaculatoriaDoDia } from "../utils/jaculatoriaDoDia";
 
 export default function JaculatoriaDoDia() {
   const insets = useSafeAreaInsets();
-  const texto = JACULATORIAS[Math.floor(Math.random() * JACULATORIAS.length)];
+  const [texto, setTexto] = useState(null);
+
+  useEffect(() => {
+    async function carregar() {
+      const frase = await getJaculatoriaDoDia();
+      setTexto(frase);
+    }
+    carregar();
+  }, []);
 
   return (
     <LinearGradient
@@ -20,7 +28,12 @@ export default function JaculatoriaDoDia() {
         ]}
       >
         <Text style={styles.title}>Jaculatória do Dia</Text>
-        <Text style={styles.text}>{texto}</Text>
+
+        {!texto ? (
+          <ActivityIndicator color="#fff" size="large" />
+        ) : (
+          <Text style={styles.text}>{texto}</Text>
+        )}
       </ScrollView>
     </LinearGradient>
   );
@@ -47,5 +60,7 @@ const styles = StyleSheet.create({
     color: "#F9F7F3",
     lineHeight: 30,
     fontStyle: "italic",
+    textAlign: "center",
+    marginTop: 30,
   },
 });
