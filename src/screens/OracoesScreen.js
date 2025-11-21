@@ -1,11 +1,21 @@
 import React from "react";
-import { Text, StyleSheet, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { ORACOES } from "../data/devocionario/oracoes";
 
-export default function OracaoDetalhe({ route }) {
-  const { id } = route.params;
-  const conteudo = ORACOES[id];
+export default function OracoesScreen({ navigation }) {
+
+  const lista = [
+    { id: "oferecimento", titulo: "Oferecimento" },
+    { id: "oremos", titulo: "Oremos" },
+    { id: "consagracao", titulo: "Consagração" },
+    { id: "ladainha", titulo: "Ladainha de Nossa Senhora das Lágrimas" },
+  ];
 
   return (
     <LinearGradient
@@ -13,15 +23,17 @@ export default function OracaoDetalhe({ route }) {
       style={styles.gradient}
     >
       <ScrollView contentContainerStyle={styles.content}>
-        <Text style={styles.title}>{id.toUpperCase()}</Text>
+        <Text style={styles.title}>Orações</Text>
 
-        {Array.isArray(conteudo) ? (
-          conteudo.map((linha, i) => (
-            <Text key={i} style={styles.text}>{linha}</Text>
-          ))
-        ) : (
-          <Text style={styles.text}>{conteudo}</Text>
-        )}
+        {lista.map((item) => (
+          <TouchableOpacity
+            key={item.id}
+            style={styles.card}
+            onPress={() => navigation.navigate("OracaoDetalhe", { id: item.id })}
+          >
+            <Text style={styles.cardText}>{item.titulo}</Text>
+          </TouchableOpacity>
+        ))}
       </ScrollView>
     </LinearGradient>
   );
@@ -29,20 +41,22 @@ export default function OracaoDetalhe({ route }) {
 
 const styles = StyleSheet.create({
   gradient: { flex: 1 },
-  content: {
-    padding: 20,
-  },
+  content: { padding: 20 },
   title: {
-    fontSize: 24,
+    fontSize: 26,
     color: "#F9F7F3",
     fontWeight: "bold",
     marginBottom: 20,
     textAlign: "center",
   },
-  text: {
-    color: "#F9F7F3",
+  card: {
+    backgroundColor: "#3B4C97aa",
+    padding: 15,
+    borderRadius: 10,
+    marginVertical: 8,
+  },
+  cardText: {
+    color: "#fff",
     fontSize: 18,
-    lineHeight: 28,
-    marginBottom: 10,
   },
 });
