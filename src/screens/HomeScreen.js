@@ -38,7 +38,7 @@ export default function HomeScreen({ navigation }) {
           >
             <Text style={styles.buttonText}>Iniciar</Text>
           </TouchableOpacity>
-          
+
           <TouchableOpacity
             style={[styles.button, { marginTop: 20, backgroundColor: "#4B1C56" }]}
             onPress={() => navigation.navigate("Devocionario")}
@@ -52,6 +52,14 @@ export default function HomeScreen({ navigation }) {
           >
             <Text style={styles.buttonText}>Orações</Text>
           </TouchableOpacity>
+          
+          <TouchableOpacity
+            style={styles.linkButton}
+            onPress={() => navigation.navigate("Historia")}
+          >
+            <Text style={styles.linkText}>📜 História da Devoção</Text>
+          </TouchableOpacity>
+
 
 
         </View>

@@ -1,0 +1,77 @@
+import React from "react";
+import { Text, StyleSheet, ScrollView, View } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { HISTORIA } from "../data/devocionario/historia";
+
+export default function HistoriaScreen() {
+  const insets = useSafeAreaInsets();
+
+  return (
+    <LinearGradient
+      colors={["#19204A", "#4B1C56", "#CFAF56"]}
+      style={styles.gradient}
+    >
+      <ScrollView
+        contentContainerStyle={[
+          styles.content,
+          { paddingTop: insets.top + 20 },
+        ]}
+      >
+        <Text style={styles.title}>{HISTORIA.titulo}</Text>
+
+        <Text style={styles.text}>{HISTORIA.introducao}</Text>
+
+        <Text style={styles.sectionTitle}>{HISTORIA.secao1_titulo}</Text>
+        <Text style={styles.text}>{HISTORIA.secao1_texto}</Text>
+
+        <Text style={styles.sectionTitle}>{HISTORIA.secao2_titulo}</Text>
+        <Text style={styles.text}>{HISTORIA.secao2_texto}</Text>
+
+        <Text style={styles.sectionTitle}>{HISTORIA.secao3_titulo}</Text>
+        <Text style={styles.text}>{HISTORIA.secao3_texto}</Text>
+
+        <Text style={styles.sectionTitle}>{HISTORIA.secao4_titulo}</Text>
+        <Text style={styles.text}>{HISTORIA.secao4_texto}</Text>
+
+        <Text style={styles.sectionTitle}>Fontes</Text>
+        {HISTORIA.fontes.map((item, i) => (
+          <Text key={i} style={styles.text}>• {item}</Text>
+        ))}
+
+        <View style={{ height: 40 }} />
+      </ScrollView>
+    </LinearGradient>
+  );
+}
+
+const styles = StyleSheet.create({
+  gradient: { flex: 1 },
+
+  content: {
+    paddingHorizontal: 20,
+    paddingBottom: 20,
+  },
+
+  title: {
+    fontSize: 28,
+    color: "#F9F7F3",
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 30,
+  },
+
+  sectionTitle: {
+    fontSize: 22,
+    fontWeight: "bold",
+    color: "#E2C878",
+    marginTop: 25,
+    marginBottom: 10,
+  },
+
+  text: {
+    color: "#F9F7F3",
+    fontSize: 18,
+    lineHeight: 28,
+  },
+});
