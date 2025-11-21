@@ -39,8 +39,8 @@ export default function App() {
         <Stack.Screen name="NovenaDia" component={NovenaDiaScreen} />
         <Stack.Screen name="Leituras" component={LeiturasScreen} />
         <Stack.Screen name="LeituraDetalhe" component={LeituraDetalhe} />
-        <Stack.Screen name="MetaCriar" component={MetaCriarScreen} />
         <Stack.Screen name="MetaAtual" component={MetaAtualScreen} />
+        <Stack.Screen name="MetaCriar" component={MetaCriarScreen} />
 
       </Stack.Navigator>
     </NavigationContainer>
