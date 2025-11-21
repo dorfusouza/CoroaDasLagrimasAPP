@@ -5,14 +5,6 @@ doloroso do Calvário. Fazei, ó bom Mestre, que nós saibamos aproveitar da li�
 que elas nos dão, para que, na Terra, realizando a Vossa Santíssima Vontade, 
 possamos um dia, no Céu, Vos louvar por toda a eternidade. Amém.`,
 
-  oracao_maior: `Vede, ó Jesus, que são as lágrimas d'Aquela que mais Vos amou na Terra e 
-que mais Vos ama no Céu.`,
-
-  oracao_menor: `Meu Jesus, ouvi os nossos rogos, pelas lágrimas de Vossa Mãe Santíssima.`,
-
-  tres_finais: `Vede, ó Jesus, que são as lágrimas d'Aquela que mais Vos amou na Terra 
-e que mais Vos ama no Céu.`,
-
   oremos: `Virgem Santíssima e Mãe das Dores, nós Vos pedimos que junteis os Vossos 
 rogos aos nossos, a fim de que Jesus, Vosso Divino Filho, a quem nos dirigimos 
 em nome das Vossas lágrimas de Mãe, ouça as nossas preces e nos conceda, com as 
