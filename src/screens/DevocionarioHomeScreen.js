@@ -15,10 +15,11 @@ export default function DevocionarioHomeScreen({ navigation }) {
   const cards = [
     { titulo: "História", rota: "Historia", emoji: "📜" },
     { titulo: "Orações", rota: "Oracoes", emoji: "🙏" },
-    { titulo: "Jaculatórias", rota: "Jaculatorias", emoji: "💧" },
+    { titulo: "Jaculatórias", rota: "Jaculatorias", emoji: "💌" },
     { titulo: "Jaculatória do Dia", rota: "JaculatoriaDoDia", emoji: "✨" },
     { titulo: "Novena", rota: "Novena", emoji: "🌹" },
     { titulo: "Leituras", rota: "Leituras", emoji: "📖" },
+
   ];
 
   return (

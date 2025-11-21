@@ -28,24 +28,36 @@ export default function HomeScreen({ navigation }) {
         style={styles.bg}
         imageStyle={styles.bgImage}
       >
-        {/* Conteúdo protegido pela área segura */}
-        <View style={[styles.overlay, { paddingBottom: insets.bottom + 40 }]}>
-          <Text style={styles.text}>Dias rezados: {dias}</Text>
+        {/* DEGRADÊ SUTIL PARA LEITURA */}
+        <View style={styles.gradientOverlay} />
+
+        {/* CONTEÚDO PRINCIPAL */}
+        <View
+          style={[
+            styles.overlay,
+            {
+              paddingBottom: insets.bottom + 40,
+              paddingTop: insets.top + 40,
+            },
+          ]}
+        >
+          <Text style={styles.title}>Nossa Senhora das Lágrimas</Text>
+
+          <Text style={styles.sub}>Dias rezados: {dias}</Text>
 
           <TouchableOpacity
-            style={styles.button}
+            style={[styles.button, styles.mainButton]}
             onPress={() => navigation.navigate("Rosario")}
           >
-            <Text style={styles.buttonText}>Iniciar</Text>
+            <Text style={styles.buttonText}>Iniciar Coroa</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={[styles.button, { marginTop: 20, backgroundColor: "#4B1C56" }]}
+            style={[styles.button, styles.secondaryButton]}
             onPress={() => navigation.navigate("DevocionarioHome")}
           >
             <Text style={styles.buttonText}>Devocionário</Text>
           </TouchableOpacity>
-
         </View>
       </ImageBackground>
     </View>
@@ -61,53 +73,69 @@ const styles = StyleSheet.create({
   bg: {
     flex: 1,
     width: "100%",
-    height: "110%",  // força cobertura da tela
+    height: "100%",
     justifyContent: "flex-end",
   },
 
   bgImage: {
     resizeMode: "cover",
-    backgroundColor: "#000",  // elimina qualquer pixel branco
+    backgroundColor: "#000",
+  },
+
+  gradientOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(0,0,0,0.4)",
   },
 
   overlay: {
     width: "100%",
     alignItems: "center",
-    backgroundColor: "rgba(0,0,0,0.35)",
   },
 
-  text: {
+  title: {
     color: "#fff",
-    fontSize: 22,
-    marginBottom: 20,
+    fontSize: 30,
     fontWeight: "bold",
+    textAlign: "center",
+    textShadowColor: "rgba(0,0,0,0.7)",
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 8,
+    marginBottom: 8,
+  },
+
+  sub: {
+    color: "#E2C878",
+    fontSize: 18,
+    marginBottom: 35,
+    fontWeight: "600",
   },
 
   button: {
-    backgroundColor: COLORS.violeta,
+    width: "75%",
     paddingVertical: 15,
-    paddingHorizontal: 50,
     borderRadius: 30,
+    marginTop: 18,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOpacity: 0.25,
+    shadowRadius: 6,
+    shadowOffset: { width: 0, height: 3 },
+    elevation: 6,
+  },
+
+  mainButton: {
+    backgroundColor: "#E2C878",
+  },
+
+  secondaryButton: {
+    backgroundColor: "#4B1C56",
+    borderWidth: 1,
+    borderColor: "#CFAF56",
   },
 
   buttonText: {
     fontSize: 20,
-    color: COLORS.branco,
-    fontWeight: "bold",
-  },
-  linkButton: {
-    marginTop: 20,
-    backgroundColor: "#3B4C97cc",
-    paddingVertical: 14,
-    paddingHorizontal: 30,
-    borderRadius: 30,
-  },
-
-  linkText: {
     color: "#fff",
-    fontSize: 18,
-    textAlign: "center",
     fontWeight: "bold",
   },
-
 });

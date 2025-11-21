@@ -10,9 +10,10 @@ import JaculatoriasScreen from "./src/screens/JaculatoriasScreen";
 import JaculatoriaDetalhe from "./src/screens/JaculatoriaDetalhe";
 import JaculatoriaDoDia from "./src/screens/JaculatoriaDoDia";
 import DevocionarioHomeScreen from "./src/screens/DevocionarioHomeScreen";
-
-
-
+import NovenaScreen from "./src/screens/NovenaScreen";
+import NovenaDiaScreen from "./src/screens/NovenaDiaScreen";
+import LeiturasScreen from "./src/screens/LeiturasScreen";
+import LeituraDetalhe from "./src/screens/LeituraDetalhe";
 
 const Stack = createNativeStackNavigator();
 
@@ -30,7 +31,10 @@ export default function App() {
         <Stack.Screen name="JaculatoriaDetalhe" component={JaculatoriaDetalhe} />
         <Stack.Screen name="JaculatoriaDoDia" component={JaculatoriaDoDia} />
         <Stack.Screen name="DevocionarioHome" component={DevocionarioHomeScreen} />
-
+        <Stack.Screen name="Novena" component={NovenaScreen} />
+        <Stack.Screen name="NovenaDia" component={NovenaDiaScreen} />
+        <Stack.Screen name="Leituras" component={LeiturasScreen} />
+        <Stack.Screen name="LeituraDetalhe" component={LeituraDetalhe} />
 
       </Stack.Navigator>
     </NavigationContainer>
