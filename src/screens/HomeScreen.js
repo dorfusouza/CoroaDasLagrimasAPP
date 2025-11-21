@@ -41,26 +41,10 @@ export default function HomeScreen({ navigation }) {
 
           <TouchableOpacity
             style={[styles.button, { marginTop: 20, backgroundColor: "#4B1C56" }]}
-            onPress={() => navigation.navigate("Devocionario")}
+            onPress={() => navigation.navigate("DevocionarioHome")}
           >
             <Text style={styles.buttonText}>Devocionário</Text>
           </TouchableOpacity>
-
-          <TouchableOpacity
-            style={[styles.button, { marginTop: 20, backgroundColor: "#4B1C56" }]}
-            onPress={() => navigation.navigate("Oracoes")}
-          >
-            <Text style={styles.buttonText}>Orações</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.linkButton}
-            onPress={() => navigation.navigate("Historia")}
-          >
-            <Text style={styles.linkText}>📜 História da Devoção</Text>
-          </TouchableOpacity>
-
-
 
         </View>
       </ImageBackground>
