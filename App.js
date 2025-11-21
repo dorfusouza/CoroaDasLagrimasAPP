@@ -14,6 +14,10 @@ import NovenaScreen from "./src/screens/NovenaScreen";
 import NovenaDiaScreen from "./src/screens/NovenaDiaScreen";
 import LeiturasScreen from "./src/screens/LeiturasScreen";
 import LeituraDetalhe from "./src/screens/LeituraDetalhe";
+import MetaCriarScreen from "./src/screens/MetaCriarScreen";
+import MetaAtualScreen from "./src/screens/MetaAtualScreen";
+
+
 
 const Stack = createNativeStackNavigator();
 
@@ -35,6 +39,8 @@ export default function App() {
         <Stack.Screen name="NovenaDia" component={NovenaDiaScreen} />
         <Stack.Screen name="Leituras" component={LeiturasScreen} />
         <Stack.Screen name="LeituraDetalhe" component={LeituraDetalhe} />
+        <Stack.Screen name="MetaCriar" component={MetaCriarScreen} />
+        <Stack.Screen name="MetaAtual" component={MetaAtualScreen} />
 
       </Stack.Navigator>
     </NavigationContainer>

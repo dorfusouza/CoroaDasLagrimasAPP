@@ -19,6 +19,8 @@ export default function DevocionarioHomeScreen({ navigation }) {
     { titulo: "Jaculatória do Dia", rota: "JaculatoriaDoDia", emoji: "✨" },
     { titulo: "Novena", rota: "Novena", emoji: "🌹" },
     { titulo: "Leituras", rota: "Leituras", emoji: "📖" },
+    { titulo: "Minhas Metas", rota: "MetaAtual", emoji: "🎯" },
+    { titulo: "Criar Meta", rota: "MetaCriar", emoji: "➕" },
 
   ];
 
