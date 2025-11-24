@@ -4,26 +4,18 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  Share,
+  Share
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { getMetaAtiva, atualizarMeta, clearMeta } from "../utils/metas";
-import * as Progress from "react-native-progress"; 
+import { getMetaAtiva, atualizarMeta } from "../utils/metas";
 
 export default function MetaAtualScreen({ navigation }) {
   const insets = useSafeAreaInsets();
   const [meta, setMeta] = useState(null);
 
   useEffect(() => {
-    let mounted = true;
-    async function load() {
-      const m = await getMetaAtiva();
-      if (mounted) setMeta(m);
-    }
-    load();
-
-    return () => (mounted = false);
+    getMetaAtiva().then(setMeta);
   }, []);
 
   if (!meta) {
@@ -39,15 +31,18 @@ export default function MetaAtualScreen({ navigation }) {
     );
   }
 
-  const pct = Math.min(1, (meta.progresso || 0) / meta.objetivo);
-  const percText = Math.round(pct * 100);
+  const pct = meta.objetivo > 0
+    ? Math.min(1, meta.progresso / meta.objetivo)
+    : 0;
+
+  const percentText = Math.round(pct * 100);
 
   async function compartilhar() {
-    try {
-      await Share.share({
-        message: `Minha meta: ${meta.titulo} — Progresso: ${meta.progresso}/${meta.objetivo}. Venha rezar comigo no app Nossa Senhora das Lágrimas 💧`,
-      });
-    } catch (e) {}
+    await Share.share({
+      message:
+        `Concluí minha meta: "${meta.titulo}". ` +
+        `Venha rezar comigo no app Nossa Senhora das Lágrimas 💧`
+    });
   }
 
   async function resetar() {
@@ -62,28 +57,20 @@ export default function MetaAtualScreen({ navigation }) {
       style={{ flex: 1 }}
     >
       <View style={[styles.container, { paddingTop: insets.top + 20 }]}>
+
         <Text style={styles.title}>{meta.titulo}</Text>
 
-        <View style={{ alignItems: "center", marginTop: 24 }}>
-          <Progress.Circle
-            size={140}
-            progress={pct}
-            showsText={true}
-            thickness={8}
-            color="#E2C878"
-            unfilledColor="#ffffff33"
-            textStyle={{ color: "#fff", fontWeight: "bold" }}
-            formatText={() => `${percText}%`}
-          />
+        {/* ==== CÍRCULO NATIVO ==== */}
+        <View style={styles.circle}>
+          <View style={[styles.circleFill, { width: `${percentText}%` }]} />
+          <Text style={styles.circleText}>{percentText}%</Text>
         </View>
 
         <Text style={styles.progressText}>
           {meta.progresso} / {meta.objetivo}
         </Text>
 
-        {/* ------------------------------- */}
-        {/*    BOTÃO REZAR AGORA ADICIONADO  */}
-        {/* ------------------------------- */}
+        {/* PRAY BUTTON */}
         <TouchableOpacity
           style={styles.btnPray}
           onPress={() => navigation.navigate("Rosario")}
@@ -91,48 +78,66 @@ export default function MetaAtualScreen({ navigation }) {
           <Text style={styles.btnPrayText}>🙏 Rezar Agora</Text>
         </TouchableOpacity>
 
-        <View style={{ marginTop: 20 }}>
-          <TouchableOpacity style={styles.btnPrimary} onPress={compartilhar}>
-            <Text style={styles.btnText}>Compartilhar progresso</Text>
-          </TouchableOpacity>
+        <TouchableOpacity style={styles.btnPrimary} onPress={compartilhar}>
+          <Text style={styles.btnText}>Compartilhar</Text>
+        </TouchableOpacity>
 
-          <TouchableOpacity
-            style={[styles.btnSecondary, { marginTop: 12 }]}
-            onPress={resetar}
-          >
-            <Text style={styles.btnText}>Resetar Meta</Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity style={styles.btnSecondary} onPress={resetar}>
+          <Text style={styles.btnText}>Resetar Meta</Text>
+        </TouchableOpacity>
+
       </View>
     </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 20,
-  },
+  container: { flex: 1, paddingHorizontal: 20 },
 
   title: {
     color: "#E2C878",
     fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",
-    marginBottom: 10,
+  },
+
+  /* Barra circular nativa */
+  circle: {
+    width: 140,
+    height: 140,
+    borderRadius: 70,
+    borderWidth: 6,
+    borderColor: "#ffffff33",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 30,
+    overflow: "hidden",
+  },
+
+  circleFill: {
+    position: "absolute",
+    left: 0,
+    top: 0,
+    bottom: 0,
+    backgroundColor: "#E2C878",
+  },
+
+  circleText: {
+    color: "#fff",
+    fontSize: 28,
+    fontWeight: "bold",
   },
 
   progressText: {
     color: "#fff",
     fontSize: 18,
     textAlign: "center",
-    marginTop: 12,
+    marginTop: 16
   },
 
-  // NOVO BOTÃO "REZAR AGORA"
   btnPray: {
     backgroundColor: "#E2C878",
-    paddingVertical: 14,
+    paddingVertical: 12,
     borderRadius: 12,
     marginTop: 25,
     alignItems: "center",
@@ -149,12 +154,14 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 10,
     alignItems: "center",
+    marginTop: 20
   },
 
   btnSecondary: {
     backgroundColor: "#7A2569",
     padding: 12,
     borderRadius: 10,
+    marginTop: 12,
     alignItems: "center",
   },
 

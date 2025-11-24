@@ -4,32 +4,39 @@ import {
   Text,
   TouchableOpacity,
   Animated,
-  StyleSheet,
   ScrollView,
   Modal,
   Share,
 } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { gerarSequencia } from "../data/oracoes";
-import { registrarDiaRezados } from "../utils/storage";
-import { registrarProgressoMetaAoFinalizar } from "../utils/metas";
-
+import GradientBackground from "../components/GradientBackground";
+import Rosary from "../components/Rosary";
 import ConfettiCannon from "react-native-confetti-cannon";
 import * as Haptics from "expo-haptics";
-import { LinearGradient } from "expo-linear-gradient";
+
+import { registrarDiaRezados } from "../utils/storage";
+import { registrarProgressoMetaAoFinalizar } from "../utils/metas";
+import { gerarSequencia } from "../data/oracoes";
+
+import styles from "./RosarioScreen.styles";
 
 export default function RosarioScreen({ navigation }) {
   const seq = gerarSequencia();
   const [index, setIndex] = useState(0);
 
+  // Meta/confetti/modal
   const [showConfetti, setShowConfetti] = useState(false);
   const [showCongrats, setShowCongrats] = useState(false);
   const [metaConcluida, setMetaConcluida] = useState(null);
+
+  const insets = useSafeAreaInsets();
 
   const etapa = seq[index];
   const totalCircleBeads = 56;
   const angleStep = (2 * Math.PI) / totalCircleBeads;
 
+  // animações
   const fade = useRef(new Animated.Value(1)).current;
   const scale = useRef(new Animated.Value(1)).current;
 
@@ -81,47 +88,15 @@ export default function RosarioScreen({ navigation }) {
     Animated.spring(scale, { toValue: 1, friction: 4, useNativeDriver: true }).start();
   }
 
-  // COROA COMPLETA EM UM COMPONENTE INDEPENDENTE
-  const renderCoroaCompleta = () => (
-    <View style={styles.coroaContainer}>
-      <View style={styles.circleContainer}>{renderCircle()}</View>
-
-      <View style={styles.finalBeads}>
-        {[0, 1, 2].map((i) => {
-          const active = index > totalCircleBeads + i;
-          return (
-            <View
-              key={i}
-              style={[
-                styles.bead,
-                styles.bigBead,
-                active ? styles.active : styles.inactive,
-                { marginVertical: 2 },
-              ]}
-            />
-          );
-        })}
-      </View>
-
-      <Animated.Image
-        source={
-          etapa.tipo === "jaculatoria" && etapa.face === 1
-            ? require("../../assets/medalha-verso.png")
-            : require("../../assets/medalha-frente.png")
-        }
-        style={[styles.medalha, { opacity: fade }]}
-      />
-    </View>
-  );
-
-  const renderCircle = () => {
+  // render circle beads array (positions) — devolve elementos para Rosary
+  const renderCircleItems = () => {
     const items = [];
     for (let i = 0; i < totalCircleBeads; i++) {
       const offset = Math.PI / 2;
       const x = Math.cos(-i * angleStep + offset) * 120;
       const y = Math.sin(-i * angleStep + offset) * 120;
 
-      const isActive = index > i || index > 56;
+      const isActive = index > i || index > totalCircleBeads;
       const isMajor = i % 8 === 0;
 
       items.push(
@@ -145,17 +120,19 @@ export default function RosarioScreen({ navigation }) {
 
   return (
     <View style={{ flex: 1 }}>
-      {/* CONFETES */}
-      {showConfetti && (
-        <ConfettiCannon count={150} origin={{ x: 200, y: 0 }} fadeOut />
-      )}
+      {/* confetti */}
+      {showConfetti && <ConfettiCannon count={150} origin={{ x: 200, y: 0 }} fadeOut />}
 
-      {/* MODAL */}
+      {/* modal de parabéns */}
       <Modal
         visible={showCongrats}
         transparent
         animationType="fade"
-        onRequestClose={() => setShowCongrats(false)}
+        onRequestClose={() => {
+          setShowCongrats(false);
+          setShowConfetti(false);
+          navigation.navigate("Home");
+        }}
       >
         <View style={styles.modalOverlay}>
           <View style={styles.modalBox}>
@@ -180,6 +157,7 @@ export default function RosarioScreen({ navigation }) {
               style={styles.modalClose}
               onPress={() => {
                 setShowCongrats(false);
+                setShowConfetti(false);
                 navigation.navigate("Home");
               }}
             >
@@ -189,25 +167,26 @@ export default function RosarioScreen({ navigation }) {
         </View>
       </Modal>
 
-      <LinearGradient
-        colors={["#19204A", "#4B1C56", "#CFAF56"]}
-        style={styles.gradient}
-      >
-
+      <GradientBackground>
         {/* COROA FIXA */}
-        <View style={styles.coroaWrapper}>{renderCoroaCompleta()}</View>
+        <View style={[styles.coroaWrapper, { paddingTop: insets.top + 18 }]}>
+          <Rosary
+            index={index}
+            etapa={etapa}
+            totalCircleBeads={totalCircleBeads}
+            fade={fade}
+            renderItems={renderCircleItems}
+          />
+        </View>
 
-        {/* SCROLL APENAS DO TEXTO */}
-        <ScrollView
-          contentContainerStyle={styles.scrollContent}
-          showsVerticalScrollIndicator={false}
-        >
+        {/* TEXTO NO TOPO (scroll apenas do texto) */}
+        <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
           <Text style={styles.title}>{etapa.tipo.toUpperCase()}</Text>
           <Text style={styles.oracao}>{etapa.texto}</Text>
         </ScrollView>
 
         {/* BOTÕES FIXOS */}
-        <View style={styles.fixedControls}>
+        <View style={[styles.fixedControls, { bottom: 40 + (insets.bottom || 0) }]}>
           <Animated.View style={{ transform: [{ scale }] }}>
             <TouchableOpacity
               onPressIn={pressIn}
@@ -230,205 +209,7 @@ export default function RosarioScreen({ navigation }) {
             </TouchableOpacity>
           </Animated.View>
         </View>
-      </LinearGradient>
+      </GradientBackground>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  gradient: { flex: 1 },
-
-  /* ===========================
-     COROA FIXA (BLOCO CENTRAL)
-  ============================ */
-  coroaWrapper: {
-    alignItems: "center",
-    marginTop: 40,
-  },
-
-  coroaContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 20,
-  },
-
-  circleContainer: {
-    width: 260,
-    height: 260,
-    position: "relative",
-  },
-
-  /* ===========================
-     SCROLL DO TEXTO
-  ============================ */
-  scrollContent: {
-    paddingHorizontal: 20,
-    paddingTop: 0,
-    paddingBottom: 180,
-  },
-
-  title: {
-    fontSize: 22,
-    fontWeight: "bold",
-    color: "#F9F7F3",
-    textAlign: "center",
-    marginBottom: 6,
-    marginTop: 10,
-  },
-
-  oracao: {
-    fontSize: 18,
-    color: "#F9F7F3",
-    textAlign: "center",
-    lineHeight: 28,
-  },
-
-  /* ===========================
-     CONTAS / MEDALHA
-  ============================ */
-  bead: {
-    borderRadius: 999,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  bigBead: {
-    width: 22,
-    aspectRatio: 1,
-  },
-
-  smallBead: {
-    width: 16,
-    height: 16,
-  },
-
-  active: {
-    backgroundColor: "#E2C878",
-    borderWidth: 1,
-    borderColor: "#C9A200",
-    shadowColor: "#E2C878",
-    shadowOpacity: 0.8,
-    shadowRadius: 6,
-  },
-
-  inactive: {
-    backgroundColor: "#D7D7D7",
-    opacity: 0.8,
-  },
-
-  finalBeads: { marginTop: 10 },
-
-  medalha: {
-    width: 85,
-    height: 110,
-    resizeMode: "contain",
-    marginTop: 4,
-  },
-
-  /* ===========================
-     BOTÕES FIXOS
-  ============================ */
-  fixedControls: {
-    position: "absolute",
-    bottom: 40,
-    width: "100%",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: 40,
-  },
-
-  baseButton: {
-    minWidth: 80,
-    height: 56,
-    borderRadius: 35,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  smallBtn: {
-    backgroundColor: "#3B4C97cc",
-    borderWidth: 1,
-    borderColor: "#93A4E8",
-  },
-
-  bigBtn: {
-    backgroundColor: "#E2C878",
-    borderWidth: 2,
-    borderColor: "#7A2569",
-  },
-
-  smallText: {
-    fontSize: 22,
-    color: "#FFFFFF",
-    fontWeight: "700",
-  },
-
-  bigText: {
-    fontSize: 26,
-    color: "#4B1C56",
-    fontWeight: "900",
-  },
-
-  /* ===========================
-     MODAL
-  ============================ */
-  modalOverlay: {
-    flex: 1,
-    backgroundColor: "rgba(0,0,0,0.6)",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  modalBox: {
-    width: "80%",
-    padding: 20,
-    backgroundColor: "#fff",
-    borderRadius: 16,
-    alignItems: "center",
-  },
-
-  modalTitle: {
-    fontSize: 28,
-    fontWeight: "bold",
-    marginBottom: 10,
-  },
-
-  modalText: {
-    fontSize: 18,
-    marginBottom: 4,
-    textAlign: "center",
-  },
-
-  modalMeta: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#7A2569",
-    marginBottom: 20,
-    textAlign: "center",
-  },
-
-  modalShare: {
-    backgroundColor: "#4B1C56",
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 10,
-    marginBottom: 15,
-  },
-
-  modalShareText: {
-    color: "#FFF",
-    fontSize: 16,
-    fontWeight: "700",
-  },
-
-  modalClose: {
-    paddingVertical: 8,
-    paddingHorizontal: 20,
-  },
-
-  modalCloseText: {
-    fontSize: 16,
-    color: "#444",
-  },
-});
