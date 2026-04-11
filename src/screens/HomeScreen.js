@@ -7,6 +7,7 @@ import { getDiasRezados } from "../utils/storage";
 import { getMetaAtiva } from "../utils/metas";
 
 import AppButton from "../components/AppButton";
+import AdBanner from "../components/AdBanner";
 import styles from "./HomeScreen.styles";
 import MetaCard from "../components/MetaCard";
 
@@ -72,6 +73,9 @@ export default function HomeScreen({ navigation }) {
               onPress={() => navigation.navigate("DevocionarioHome")}
             />
           </View>
+
+          {/* Banner de anúncio */}
+          <AdBanner />
         </View>
       </ImageBackground>
     </View>

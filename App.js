@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "./src/screens/HomeScreen";
@@ -16,12 +17,15 @@ import LeiturasScreen from "./src/screens/LeiturasScreen";
 import LeituraDetalhe from "./src/screens/LeituraDetalhe";
 import MetaCriarScreen from "./src/screens/MetaCriarScreen";
 import MetaAtualScreen from "./src/screens/MetaAtualScreen";
-
-
+import { initAds } from "./src/utils/ads";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  useEffect(() => {
+    initAds();
+  }, []);
+
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -41,7 +45,6 @@ export default function App() {
         <Stack.Screen name="LeituraDetalhe" component={LeituraDetalhe} />
         <Stack.Screen name="MetaAtual" component={MetaAtualScreen} />
         <Stack.Screen name="MetaCriar" component={MetaCriarScreen} />
-
       </Stack.Navigator>
     </NavigationContainer>
   );

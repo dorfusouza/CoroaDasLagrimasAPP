@@ -18,6 +18,7 @@ import * as Haptics from "expo-haptics";
 import { registrarDiaRezados } from "../utils/storage";
 import { registrarProgressoMetaAoFinalizar } from "../utils/metas";
 import { gerarSequencia } from "../data/oracoes";
+import { loadInterstitial } from "../utils/ads";
 
 import styles from "./RosarioScreen.styles";
 
@@ -77,7 +78,8 @@ export default function RosarioScreen({ navigation }) {
       return;
     }
 
-    navigation.navigate("Home");
+    // Mostrar intersticial antes de voltar à Home
+    loadInterstitial(() => navigation.navigate("Home"));
   }
 
   function pressIn() {

@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import AdBanner from "../components/AdBanner";
 
 export default function DevocionarioHomeScreen({ navigation }) {
   const insets = useSafeAreaInsets();
@@ -49,9 +50,8 @@ export default function DevocionarioHomeScreen({ navigation }) {
             </TouchableOpacity>
           ))}
         </View>
-
-        <View style={{ height: 50 }} />
       </ScrollView>
+      <AdBanner />
     </LinearGradient>
   );
 }

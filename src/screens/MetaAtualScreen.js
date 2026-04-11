@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useCallback } from "react";
 import {
   View,
   Text,
@@ -8,15 +8,18 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useFocusEffect } from "@react-navigation/native";
 import { getMetaAtiva, atualizarMeta } from "../utils/metas";
 
 export default function MetaAtualScreen({ navigation }) {
   const insets = useSafeAreaInsets();
   const [meta, setMeta] = useState(null);
 
-  useEffect(() => {
-    getMetaAtiva().then(setMeta);
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      getMetaAtiva().then(setMeta);
+    }, [])
+  );
 
   if (!meta) {
     return (
@@ -110,6 +113,7 @@ const styles = StyleSheet.create({
     borderColor: "#ffffff33",
     justifyContent: "center",
     alignItems: "center",
+    alignSelf: "center",
     marginTop: 30,
     overflow: "hidden",
   },
