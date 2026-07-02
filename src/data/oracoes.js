@@ -9,7 +9,7 @@ export const TRES_FINAIS = `Vede, ó Jesus, que são as lágrimas d'Aquela que m
 export const OREMOS = `Virgem Santíssima e Mãe das Dores, nós Vos pedimos que junteis os Vossos rogos aos nossos, a fim de que Jesus, Vosso Divino Filho, a quem nos dirigimos em nome das Vossas lágrimas de Mãe, ouça as nossas preces e nos conceda, com as graças que desejamos, a coroa da vida eterna. Amém.`;
 
 export const JACULATORIAS = [
-  `Por Vossa mansidão divina, ó Jesus, salvai o mundo do erro que o ameaça!`,
+  `Por Vossa mansidão divina, ó Jesus Manietado, salvai o mundo do erro que o ameaça!`,
   `Ó Virgem Dolorosíssima, as Vossas Lágrimas derrubaram o império infernal!`
 ];
 

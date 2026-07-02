@@ -132,6 +132,6 @@ Oração
 
 Ó Maria, Mãe das Lágrimas, ao concluir esta novena depositamos em vosso Coração Materno todas as nossas súplicas. Apresentai-as a Jesus com o poder das vossas lágrimas, e alcançai-nos as graças que Deus sabe serem as melhores para nós (momento de silêncio). Fazei-nos apóstolos desta devoção, para consolo do vosso Coração e salvação das almas. Amém.
 
-Reze hoje a Coroa das Lágrimas e conclua: Por Vossa mansidão divina, ó Jesus, salvai o mundo do erro que o ameaça!`,
+Reze hoje a Coroa das Lágrimas e conclua: Por Vossa mansidão divina, ó Jesus Manietado, salvai o mundo do erro que o ameaça!`,
   },
 ];

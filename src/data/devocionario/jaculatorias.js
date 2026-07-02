@@ -1,5 +1,5 @@
 export const JACULATORIAS = [
-  "Por Vossa mansidão divina, ó Jesus, salvai o mundo do erro que o ameaça!",
+  "Por Vossa mansidão divina, ó Jesus Manietado, salvai o mundo do erro que o ameaça!",
   "Ó Virgem Dolorosíssima, as Vossas Lágrimas derrubaram o império infernal!",
   "Santa Mãe das Lágrimas, acolhei nossas súplicas!",
   "Pelas Vossas Lágrimas, ó Maria, obtende-nos a graça da conversão!",

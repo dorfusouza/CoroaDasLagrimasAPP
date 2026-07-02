@@ -2,18 +2,22 @@ export const HISTORIA = {
   titulo: "História da Devoção a Nossa Senhora das Lágrimas",
 
   introducao: `A devoção a Nossa Senhora das Lágrimas está ligada às experiências místicas
-vividas por Irmã Amália Aguirre, religiosa da Congregação das Filhas do Sagrado 
-Coração de Jesus, em Campinas (SP), no início dos anos 1930. Numa série de 
-manifestações espirituais, a Mãe de Deus revelou-lhe a oração da “Coroa das 
-Lágrimas”, explicando o valor salvífico de Suas Lágrimas derramadas junto ao 
+vividas por Irmã Amália de Jesus Flagelado (Amália Aguirre, 1901–1977), religiosa
+espanhola radicada no Brasil e cofundadora, com Dom Francisco de Campos Barreto,
+do Instituto das Missionárias de Jesus Crucificado, em Campinas (SP). Numa série
+de manifestações espirituais, a Mãe de Deus revelou-lhe a oração da “Coroa das
+Lágrimas”, explicando o valor salvífico de Suas Lágrimas derramadas junto ao
 Seu Filho durante a Paixão.`,
 
   secao1_titulo: "As Aparições",
-  secao1_texto: `Segundo o testemunho preservado pela Congregação, Irmã Amália recebeu 
-locuções interiores profundas e visões espirituais. Em uma delas, a Santíssima 
-Virgem apareceu sofrendo e chorando, enquanto segurava um rosário feito de 
-lágrimas. Nessa ocasião, ensinou à religiosa a oração da Coroa e prometeu grandes 
-graças espirituais àqueles que meditassem com amor e confiança em Suas Lágrimas.`,
+  secao1_texto: `Segundo o testemunho preservado pelo Instituto, Irmã Amália recebeu
+locuções interiores profundas e visões espirituais na capela da congregação, em
+Campinas. Em 8 de março de 1930, a Santíssima Virgem apareceu-lhe sofrendo e
+chorando, apresentando-se como Nossa Senhora das Lágrimas e ensinando a oração
+da Coroa. Em 8 de abril de 1930, revelou-lhe a medalha da devoção, prometendo
+grandes graças espirituais àqueles que meditassem com amor e confiança em Suas
+Lágrimas. As manifestações foram acolhidas pelo então bispo de Campinas, Dom
+Francisco de Campos Barreto.`,
 
   secao2_titulo: "A Coroa das Lágrimas",
   secao2_texto: `A Coroa das Lágrimas é composta por sete grupos de súplicas, meditadas 
@@ -36,7 +40,8 @@ auxiliaram a redescoberta dessa riqueza espiritual, convidando os fiéis a
 mergulhar no mistério das Lágrimas de Maria e unir sua própria vida à de Cristo.`,
 
   fontes: [
-    "Tradição devocional das Filhas do Sagrado Coração de Jesus",
+    "Tradição devocional das Missionárias de Jesus Crucificado",
+    "Devocionário das Lágrimas — Prof. Raphael Tonon (Canção Nova)",
     "Devocionários clássicos brasileiros (séc. XX)",
     "Estudos contemporâneos sobre Irmã Amália",
   ],
