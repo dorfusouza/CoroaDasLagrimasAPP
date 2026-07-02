@@ -6,3 +6,9 @@ export const SPACING = {
   xl: 32,
   xxl: 48,
 };
+
+export const RADIUS = {
+  chip: 10,
+  card: 18,
+  pill: 999,
+};

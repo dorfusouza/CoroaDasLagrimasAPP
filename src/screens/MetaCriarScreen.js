@@ -28,7 +28,7 @@ export default function MetaCriarScreen({ navigation }) {
       concluido: false,
     };
     await setMeta(meta);
-    navigation.navigate("MetaAtual");
+    navigation.replace("MetaAtual");
   }
 
   return (

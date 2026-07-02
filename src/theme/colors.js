@@ -7,11 +7,21 @@ export const COLORS = {
   azulMariano: "#3B4C97",
 
   // FUNDOS
+  fundoProfundo: "#10142E",
   fundoEscuro: "#19204A",
   fundoRoxo: "#4B1C56",
   fundoDourado: "#CFAF56",
   preto: "#000000",
   branco: "#FFFFFF",
+
+  // SUPERFÍCIES (cards e painéis)
+  surface: "rgba(255,255,255,0.08)",
+  surfaceSolida: "#212850",
+  surfaceEscura: "rgba(16,20,46,0.6)",
+
+  // ACENTOS DOURADOS
+  douradoTrans: "rgba(226,200,120,0.16)",
+  douradoBordaSuave: "rgba(226,200,120,0.45)",
 
   // TRANSPARÊNCIAS
   overlay: "rgba(0,0,0,0.4)",
@@ -24,9 +34,10 @@ export const COLORS = {
 
   // TEXTO
   textoClaro: "#F9F7F3",
+  textoSecundario: "#9BA3CF",
   textoEscuro: "#1A1A1A",
 
-  // BOTÕES
+  // BOTÕES
   btnPrimario: "#E2C878",
   btnSecundario: "#4B1C56",
   btnBorda: "#CFAF56",

@@ -1,4 +1,8 @@
 import { useEffect } from "react";
+import {
+  useFonts,
+  PlayfairDisplay_600SemiBold,
+} from "@expo-google-fonts/playfair-display";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "./src/screens/HomeScreen";
@@ -22,9 +26,13 @@ import { initAds } from "./src/utils/ads";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [fontsLoaded] = useFonts({ PlayfairDisplay_600SemiBold });
+
   useEffect(() => {
     initAds();
   }, []);
+
+  if (!fontsLoaded) return null;
 
   return (
     <NavigationContainer>

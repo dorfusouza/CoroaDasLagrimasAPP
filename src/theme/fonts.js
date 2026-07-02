@@ -1,5 +1,5 @@
 export const FONTS = {
   regular: "System",
   bold: "System",
-  title: "System",
+  title: "PlayfairDisplay_600SemiBold",
 };

@@ -4,48 +4,57 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import AdBanner from "../components/AdBanner";
+import { COLORS, SPACING, RADIUS, FONTS } from "../theme";
 
 export default function DevocionarioHomeScreen({ navigation }) {
   const insets = useSafeAreaInsets();
 
   const cards = [
-    { titulo: "História", rota: "Historia", emoji: "📜" },
-    { titulo: "Orações", rota: "Oracoes", emoji: "🙏" },
-    { titulo: "Jaculatórias", rota: "Jaculatorias", emoji: "💌" },
-    { titulo: "Jaculatória do Dia", rota: "JaculatoriaDoDia", emoji: "✨" },
-    { titulo: "Novena", rota: "Novena", emoji: "🌹" },
-    { titulo: "Leituras", rota: "Leituras", emoji: "📖" },
-    { titulo: "Minhas Metas", rota: "MetaAtual", emoji: "🎯" },
-    { titulo: "Criar Meta", rota: "MetaCriar", emoji: "➕" },
-
+    { titulo: "História", rota: "Historia", icone: "script-text-outline" },
+    { titulo: "Orações", rota: "Oracoes", icone: "hands-pray" },
+    { titulo: "Jaculatórias", rota: "Jaculatorias", icone: "cards-heart-outline" },
+    { titulo: "Jaculatória do Dia", rota: "JaculatoriaDoDia", icone: "star-four-points-outline" },
+    { titulo: "Novena", rota: "Novena", icone: "flower-outline" },
+    { titulo: "Leituras", rota: "Leituras", icone: "book-open-variant" },
+    { titulo: "Minhas Metas", rota: "MetaAtual", icone: "target" },
+    { titulo: "Materiais e Estudo", rota: "Devocionario", icone: "bookshelf" },
   ];
 
   return (
     <LinearGradient
-      colors={["#19204A", "#4B1C56", "#CFAF56"]}
+      colors={[COLORS.fundoProfundo, COLORS.fundoEscuro, COLORS.violeta]}
       style={styles.gradient}
     >
       <ScrollView
         contentContainerStyle={[
           styles.content,
-          { paddingTop: insets.top + 20 },
+          { paddingTop: insets.top + 24 },
         ]}
       >
         <Text style={styles.title}>Devocionário</Text>
+        <Text style={styles.subtitle}>Orações, novena e leituras</Text>
 
         <View style={styles.grid}>
           {cards.map((item) => (
             <TouchableOpacity
               key={item.rota}
               style={styles.card}
+              activeOpacity={0.75}
               onPress={() => navigation.navigate(item.rota)}
             >
-              <Text style={styles.cardEmoji}>{item.emoji}</Text>
+              <View style={styles.iconChip}>
+                <MaterialCommunityIcons
+                  name={item.icone}
+                  size={20}
+                  color={COLORS.dourado}
+                />
+              </View>
               <Text style={styles.cardTitle}>{item.titulo}</Text>
             </TouchableOpacity>
           ))}
@@ -60,16 +69,21 @@ const styles = StyleSheet.create({
   gradient: { flex: 1 },
 
   content: {
-    paddingHorizontal: 20,
-    paddingBottom: 20,
+    paddingHorizontal: SPACING.md,
+    paddingBottom: SPACING.lg,
   },
 
   title: {
-    fontSize: 32,
-    color: "#F9F7F3",
-    fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: 30,
+    fontFamily: FONTS.title,
+    fontSize: 30,
+    color: COLORS.textoClaro,
+    marginBottom: 2,
+  },
+
+  subtitle: {
+    fontSize: 14,
+    color: COLORS.textoSecundario,
+    marginBottom: SPACING.lg,
   },
 
   grid: {
@@ -79,23 +93,26 @@ const styles = StyleSheet.create({
   },
 
   card: {
-    width: "48%",
-    backgroundColor: "#3B4C97cc",
-    borderRadius: 12,
-    paddingVertical: 25,
-    marginBottom: 20,
-    alignItems: "center",
+    width: "48.5%",
+    backgroundColor: COLORS.surface,
+    borderRadius: RADIUS.card,
+    padding: SPACING.md,
+    marginBottom: SPACING.sm + 2,
   },
 
-  cardEmoji: {
-    fontSize: 32,
-    marginBottom: 10,
+  iconChip: {
+    width: 36,
+    height: 36,
+    borderRadius: RADIUS.chip,
+    backgroundColor: COLORS.douradoTrans,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: SPACING.sm + 2,
   },
 
   cardTitle: {
-    fontSize: 18,
-    color: "#F9F7F3",
-    textAlign: "center",
+    fontSize: 14,
+    color: COLORS.textoClaro,
     fontWeight: "600",
   },
 });

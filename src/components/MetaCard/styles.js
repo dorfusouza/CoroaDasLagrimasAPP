@@ -1,59 +1,74 @@
 import { StyleSheet } from "react-native";
-import { COLORS, SPACING } from "../../theme";
+import { COLORS, SPACING, RADIUS } from "../../theme";
 
 export default StyleSheet.create({
   card: {
-    width: "85%",
-    backgroundColor: "rgba(0,0,0,0.45)",
+    width: "100%",
+    backgroundColor: COLORS.surfaceEscura,
     padding: SPACING.md,
-    borderRadius: 20,
+    borderRadius: RADIUS.card,
     marginBottom: SPACING.lg,
-    borderWidth: 1,
-    borderColor: COLORS.dourado,
     alignSelf: "center",
   },
 
-  title: {
+  headerRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: SPACING.sm,
+  },
+
+  labelRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+  },
+
+  label: {
+    color: COLORS.textoSecundario,
+    fontSize: 12,
+    letterSpacing: 0.4,
+    textTransform: "uppercase",
+  },
+
+  progressLabel: {
     color: COLORS.dourado,
-    fontSize: 18,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: SPACING.xs,
-  },
-
-  text: {
-    color: COLORS.branco,
-    fontSize: 17,
+    fontSize: 13,
     fontWeight: "600",
-    textAlign: "center",
   },
 
-  progressText: {
-    color: COLORS.branco,
+  title: {
+    color: COLORS.textoClaro,
     fontSize: 16,
-    textAlign: "center",
-    marginTop: SPACING.sm,
+    fontWeight: "600",
+    marginBottom: SPACING.sm,
   },
 
   progressBarBackground: {
     width: "100%",
-    height: 12,
-    borderRadius: 6,
-    backgroundColor: COLORS.brancoTrans,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: "rgba(255,255,255,0.12)",
     overflow: "hidden",
-    marginTop: SPACING.sm,
-    marginBottom: SPACING.sm,
   },
 
   progressBarFill: {
     height: "100%",
+    borderRadius: 3,
     backgroundColor: COLORS.dourado,
   },
 
-  // ⭐ SOLUÇÃO PARA CENTRALIZAR O BOTÃO
-  buttonWrapper: {
-    width: "100%",
+  footerRow: {
+    flexDirection: "row",
     alignItems: "center",
+    justifyContent: "flex-end",
     marginTop: SPACING.sm,
+    gap: 2,
+  },
+
+  footerText: {
+    color: COLORS.dourado,
+    fontSize: 13,
+    fontWeight: "600",
   },
 });

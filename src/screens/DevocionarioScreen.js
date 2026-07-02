@@ -8,23 +8,51 @@ import {
   Linking,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { COLORS, SPACING, RADIUS, FONTS } from "../theme";
 
 export default function DevocionarioScreen({ navigation }) {
   const insets = useSafeAreaInsets();
 
+  const links = [
+    {
+      titulo: "Comprar Devocionário (Raphael Tonon)",
+      icone: "book-outline",
+      onPress: () =>
+        Linking.openURL(
+          "https://livrariaraphaeltonon.com.br/devocionario-das-lagrimas"
+        ),
+    },
+    {
+      titulo: "Aulas e Reflexões",
+      icone: "play-circle-outline",
+      onPress: () =>
+        Linking.openURL(
+          "https://www.youtube.com/results?search_query=raphael+tonon+lágrimas"
+        ),
+    },
+    {
+      titulo: "Rezar a Coroa das Lágrimas",
+      icone: "hands-pray",
+      onPress: () => navigation.navigate("Rosario"),
+    },
+  ];
+
   return (
     <LinearGradient
-      colors={["#19204A", "#4B1C56", "#CFAF56"]}
+      colors={[COLORS.fundoProfundo, COLORS.fundoEscuro, COLORS.violeta]}
       style={styles.gradient}
     >
       <ScrollView
         contentContainerStyle={[
           styles.content,
-          { paddingTop: insets.top + 20 },
+          { paddingTop: insets.top + 24 },
         ]}
       >
-        <Text style={styles.title}>Devocionário de Nossa Senhora das Lágrimas</Text>
+        <Text style={styles.title}>
+          Devocionário de Nossa Senhora das Lágrimas
+        </Text>
 
         <Text style={styles.sectionTitle}>História</Text>
         <Text style={styles.text}>
@@ -36,34 +64,28 @@ export default function DevocionarioScreen({ navigation }) {
 
         <Text style={styles.sectionTitle}>Material de Estudo e Oração</Text>
 
-        <TouchableOpacity
-          style={styles.linkButton}
-          onPress={() =>
-            Linking.openURL(
-              "https://livrariaraphaeltonon.com.br/devocionario-das-lagrimas"
-            )
-          }
-        >
-          <Text style={styles.linkText}>📘 Comprar Devocionário (Raphael Tonon)</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.linkButton}
-          onPress={() =>
-            Linking.openURL(
-              "https://www.youtube.com/results?search_query=raphael+tonon+lágrimas"
-            )
-          }
-        >
-          <Text style={styles.linkText}>🎥 Aulas e Reflexões</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.linkButton}
-          onPress={() => navigation.navigate("Rosario")}
-        >
-          <Text style={styles.linkText}>🙏 Rezar a Coroa das Lágrimas</Text>
-        </TouchableOpacity>
+        {links.map((item) => (
+          <TouchableOpacity
+            key={item.titulo}
+            style={styles.linkButton}
+            activeOpacity={0.75}
+            onPress={item.onPress}
+          >
+            <View style={styles.iconChip}>
+              <MaterialCommunityIcons
+                name={item.icone}
+                size={18}
+                color={COLORS.dourado}
+              />
+            </View>
+            <Text style={styles.linkText}>{item.titulo}</Text>
+            <MaterialCommunityIcons
+              name="chevron-right"
+              size={18}
+              color={COLORS.textoSecundario}
+            />
+          </TouchableOpacity>
+        ))}
 
         <View style={{ height: 40 }} />
       </ScrollView>
@@ -75,43 +97,56 @@ const styles = StyleSheet.create({
   gradient: { flex: 1 },
 
   content: {
-    paddingHorizontal: 20,
-    paddingBottom: 20,
+    paddingHorizontal: SPACING.md + 4,
+    paddingBottom: SPACING.lg,
   },
 
   title: {
+    fontFamily: FONTS.title,
     fontSize: 26,
-    fontWeight: "bold",
-    color: "#F9F7F3",
-    textAlign: "center",
-    marginBottom: 30,
+    lineHeight: 34,
+    color: COLORS.textoClaro,
+    marginBottom: SPACING.lg,
   },
 
   sectionTitle: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: "700",
-    color: "#E2C878",
-    marginTop: 20,
-    marginBottom: 10,
+    color: COLORS.dourado,
+    marginTop: SPACING.lg,
+    marginBottom: SPACING.sm,
   },
 
   text: {
-    color: "#F9F7F3",
-    fontSize: 17,
+    color: COLORS.textoClaro,
+    fontSize: 16,
     lineHeight: 26,
   },
 
   linkButton: {
-    backgroundColor: "#3B4C97aa",
-    paddingVertical: 14,
-    paddingHorizontal: 16,
-    borderRadius: 12,
-    marginTop: 15,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: SPACING.sm + 4,
+    backgroundColor: COLORS.surface,
+    paddingVertical: SPACING.sm + 4,
+    paddingHorizontal: SPACING.md,
+    borderRadius: RADIUS.card,
+    marginTop: SPACING.sm + 4,
+  },
+
+  iconChip: {
+    width: 32,
+    height: 32,
+    borderRadius: RADIUS.chip,
+    backgroundColor: COLORS.douradoTrans,
+    alignItems: "center",
+    justifyContent: "center",
   },
 
   linkText: {
-    color: "#fff",
-    fontSize: 17,
-    textAlign: "center",
+    flex: 1,
+    color: COLORS.textoClaro,
+    fontSize: 15,
+    fontWeight: "600",
   },
 });

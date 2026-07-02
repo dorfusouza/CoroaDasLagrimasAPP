@@ -59,7 +59,7 @@ export default function RosarioScreen({ navigation }) {
 
   function voltar() {
     if (index > 0) setIndex(index - 1);
-    else navigation.navigate("Home");
+    else navigation.goBack();
   }
 
   async function finalizar() {
@@ -153,6 +153,17 @@ export default function RosarioScreen({ navigation }) {
               }}
             >
               <Text style={styles.modalShareText}>Compartilhar conquista</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.modalShare}
+              onPress={() => {
+                setShowCongrats(false);
+                setShowConfetti(false);
+                navigation.navigate("MetaCriar");
+              }}
+            >
+              <Text style={styles.modalShareText}>Criar nova meta</Text>
             </TouchableOpacity>
 
             <TouchableOpacity

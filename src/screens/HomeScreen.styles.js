@@ -1,106 +1,49 @@
 import { StyleSheet } from "react-native";
-import { COLORS, SPACING } from "../theme";
+import { COLORS, SPACING, RADIUS, FONTS } from "../theme";
 
 export default StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: COLORS.preto,
+    backgroundColor: COLORS.fundoProfundo,
   },
 
   bg: {
-    flex: 1,
-    width: "100%",
-    height: "110%",  // 🔥 EVITA A LINHA BRANCA NO APK
-    justifyContent: "flex-end",
-  },
-
-  bgImage: {
-    resizeMode: "cover",
-  },
-
-  overlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: "rgba(0,0,0,0.35)",
+    width: "100%",
+    height: "100%",
   },
 
   container: {
+    flex: 1,
     width: "100%",
+    justifyContent: "flex-end",
     alignItems: "center",
+    paddingHorizontal: SPACING.lg,
   },
 
   title: {
-    color: COLORS.branco,
-    fontSize: 30,
-    fontWeight: "bold",
+    fontFamily: FONTS.title,
+    color: COLORS.textoClaro,
+    fontSize: 34,
+    lineHeight: 42,
     textAlign: "center",
-    textShadowColor: "rgba(0,0,0,0.7)",
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 8,
-    marginBottom: SPACING.xs,
-  },
-
-  sub: {
-    color: COLORS.dourado,
-    fontSize: 18,
-    fontWeight: "600",
-    marginBottom: SPACING.lg,
-  },
-
-  metaBox: {
-    width: "85%",
-    backgroundColor: "rgba(0,0,0,0.45)",
-    padding: SPACING.md,
-    borderRadius: 20,
-    marginBottom: SPACING.lg,
-    borderWidth: 1,
-    borderColor: COLORS.dourado,
-  },
-
-  metaTitle: {
-    color: COLORS.dourado,
-    fontSize: 18,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: SPACING.xs,
-  },
-
-  metaText: {
-    color: COLORS.branco,
-    fontSize: 17,
-    fontWeight: "600",
-    textAlign: "center",
-  },
-
-  metaProgress: {
-    color: COLORS.branco,
-    fontSize: 16,
-    textAlign: "center",
-    marginTop: SPACING.xs,
-  },
-
-  progressBarBackground: {
-    width: "100%",
-    height: 12,
-    borderRadius: 6,
-    backgroundColor: COLORS.brancoTrans,
-    overflow: "hidden",
-    marginTop: SPACING.sm,
     marginBottom: SPACING.sm,
   },
 
-  progressBarFill: {
-    height: "100%",
-    backgroundColor: COLORS.dourado,
-  },
-  contentPanel: {
-    width: "100%",
-    backgroundColor: "rgba(0,0,0,0.45)",   // fundo translúcido
-    paddingHorizontal: SPACING.md,
-    paddingVertical: SPACING.xl,
-    borderTopLeftRadius: 12,
-    borderTopRightRadius: 12,
+  chip: {
+    flexDirection: "row",
     alignItems: "center",
+    gap: 6,
+    backgroundColor: COLORS.douradoTrans,
+    paddingVertical: 6,
+    paddingHorizontal: 14,
+    borderRadius: RADIUS.pill,
+    marginBottom: SPACING.lg,
   },
 
-
+  chipText: {
+    color: COLORS.dourado,
+    fontSize: 13,
+    fontWeight: "600",
+  },
 });

@@ -1,10 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Text, StyleSheet, ScrollView, ActivityIndicator } from "react-native";
+import {
+  Text,
+  StyleSheet,
+  ScrollView,
+  ActivityIndicator,
+  TouchableOpacity,
+  Share,
+  View,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { getJaculatoriaDoDia } from "../utils/jaculatoriaDoDia";
+import { COLORS, SPACING, RADIUS, FONTS } from "../theme";
 
-export default function JaculatoriaDoDia() {
+export default function JaculatoriaDoDia({ navigation }) {
   const insets = useSafeAreaInsets();
   const [texto, setTexto] = useState(null);
 
@@ -16,23 +26,54 @@ export default function JaculatoriaDoDia() {
     carregar();
   }, []);
 
+  async function compartilhar() {
+    await Share.share({
+      message: `"${texto}" — Jaculatória do dia no app Nossa Senhora das Lágrimas 💧`,
+    });
+  }
+
   return (
     <LinearGradient
-      colors={["#19204A", "#4B1C56", "#CFAF56"]}
+      colors={[COLORS.fundoProfundo, COLORS.fundoEscuro, COLORS.violeta]}
       style={styles.gradient}
     >
       <ScrollView
         contentContainerStyle={[
           styles.content,
-          { paddingTop: insets.top + 20 },
+          { paddingTop: insets.top + 24 },
         ]}
       >
         <Text style={styles.title}>Jaculatória do Dia</Text>
 
         {!texto ? (
-          <ActivityIndicator color="#fff" size="large" />
+          <ActivityIndicator color={COLORS.dourado} size="large" />
         ) : (
-          <Text style={styles.text}>{texto}</Text>
+          <>
+            <Text style={styles.text}>{texto}</Text>
+
+            <View style={styles.actions}>
+              <TouchableOpacity style={styles.shareBtn} onPress={compartilhar}>
+                <MaterialCommunityIcons
+                  name="share-variant-outline"
+                  size={18}
+                  color={COLORS.violeta}
+                />
+                <Text style={styles.shareBtnText}>Compartilhar</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.allBtn}
+                onPress={() => navigation.navigate("Jaculatorias")}
+              >
+                <Text style={styles.allBtnText}>Ver todas as jaculatórias</Text>
+                <MaterialCommunityIcons
+                  name="chevron-right"
+                  size={18}
+                  color={COLORS.dourado}
+                />
+              </TouchableOpacity>
+            </View>
+          </>
         )}
       </ScrollView>
     </LinearGradient>
@@ -43,24 +84,59 @@ const styles = StyleSheet.create({
   gradient: { flex: 1 },
 
   content: {
-    paddingHorizontal: 20,
-    paddingBottom: 20,
+    paddingHorizontal: SPACING.md + 4,
+    paddingBottom: SPACING.lg,
   },
 
   title: {
+    fontFamily: FONTS.title,
     fontSize: 26,
-    fontWeight: "bold",
-    color: "#F9F7F3",
+    color: COLORS.textoClaro,
     textAlign: "center",
-    marginBottom: 20,
+    marginBottom: SPACING.md,
   },
 
   text: {
     fontSize: 20,
-    color: "#F9F7F3",
+    color: COLORS.textoClaro,
     lineHeight: 30,
     fontStyle: "italic",
     textAlign: "center",
-    marginTop: 30,
+    marginTop: SPACING.xl,
+  },
+
+  actions: {
+    alignItems: "center",
+    marginTop: SPACING.xl,
+    gap: SPACING.md,
+  },
+
+  shareBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: SPACING.sm,
+    backgroundColor: COLORS.dourado,
+    paddingVertical: 12,
+    paddingHorizontal: SPACING.lg,
+    borderRadius: RADIUS.pill,
+  },
+
+  shareBtnText: {
+    color: COLORS.violeta,
+    fontSize: 15,
+    fontWeight: "600",
+  },
+
+  allBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 2,
+    paddingVertical: SPACING.sm,
+  },
+
+  allBtnText: {
+    color: COLORS.dourado,
+    fontSize: 14,
+    fontWeight: "600",
   },
 });
