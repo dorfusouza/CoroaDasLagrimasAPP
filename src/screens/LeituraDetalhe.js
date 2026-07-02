@@ -1,8 +1,9 @@
 import React from "react";
-import { Text, StyleSheet, ScrollView } from "react-native";
+import { Text, StyleSheet, ScrollView, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { LEITURAS } from "../data/devocionario/leituras";
+import { COLORS, SPACING, FONTS } from "../theme";
 
 export default function LeituraDetalhe({ route }) {
   const insets = useSafeAreaInsets();
@@ -12,20 +13,20 @@ export default function LeituraDetalhe({ route }) {
 
   return (
     <LinearGradient
-      colors={["#19204A", "#4B1C56", "#CFAF56"]}
+      colors={[COLORS.fundoProfundo, COLORS.fundoEscuro, COLORS.violeta]}
       style={styles.gradient}
     >
       <ScrollView
         contentContainerStyle={[
           styles.content,
-          { paddingTop: insets.top + 20 },
+          { paddingTop: insets.top + 24 },
         ]}
       >
         <Text style={styles.title}>{item.titulo}</Text>
 
         <Text style={styles.text}>{item.texto}</Text>
 
-        <Text style={{ height: 50 }} />
+        <View style={{ height: 50 }} />
       </ScrollView>
     </LinearGradient>
   );
@@ -35,22 +36,22 @@ const styles = StyleSheet.create({
   gradient: { flex: 1 },
 
   content: {
-    paddingHorizontal: 20,
-    paddingBottom: 20,
+    paddingHorizontal: SPACING.md + 4,
+    paddingBottom: SPACING.lg,
   },
 
   title: {
+    fontFamily: FONTS.title,
     fontSize: 26,
-    fontWeight: "bold",
-    color: "#E2C878",
-    textAlign: "center",
-    marginBottom: 20,
+    lineHeight: 34,
+    color: COLORS.dourado,
+    marginBottom: SPACING.md,
   },
 
   text: {
-    fontSize: 18,
-    color: "#F9F7F3",
+    fontSize: 17,
+    color: COLORS.textoClaro,
     lineHeight: 28,
-    marginTop: 10,
+    marginTop: SPACING.sm,
   },
 });

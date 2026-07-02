@@ -1,14 +1,28 @@
 import React, { useState } from "react";
 import {
-  View, Text, TextInput, TouchableOpacity, StyleSheet, Alert
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+  ScrollView,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { setMeta } from "../utils/metas";
+import { COLORS, SPACING, RADIUS, FONTS } from "../theme";
+import AppButton from "../components/AppButton";
+
+const TIPOS = [
+  { id: "coroas", label: "Coroas" },
+  { id: "dias", label: "Dias (streak)" },
+  { id: "novena", label: "Novena" },
+];
 
 export default function MetaCriarScreen({ navigation }) {
   const insets = useSafeAreaInsets();
-  const [tipo, setTipo] = useState("coroas"); // coroas / dias / novena
+  const [tipo, setTipo] = useState("coroas");
   const [objetivo, setObjetivo] = useState("10");
   const [titulo, setTitulo] = useState("");
 
@@ -32,55 +46,135 @@ export default function MetaCriarScreen({ navigation }) {
   }
 
   return (
-    <LinearGradient colors={["#19204A", "#4B1C56", "#CFAF56"]} style={{flex:1}}>
-      <View style={[styles.container, { paddingTop: insets.top + 20 }]}>
-        <Text style={styles.title}>Criar Meta</Text>
+    <LinearGradient
+      colors={[COLORS.fundoProfundo, COLORS.fundoEscuro, COLORS.violeta]}
+      style={{ flex: 1 }}
+    >
+      <ScrollView
+        contentContainerStyle={[
+          styles.container,
+          { paddingTop: insets.top + 24 },
+        ]}
+        keyboardShouldPersistTaps="handled"
+      >
+        <Text style={styles.title}>Criar meta</Text>
+        <Text style={styles.subtitle}>
+          Escolha um objetivo para sua caminhada de oração
+        </Text>
 
+        <Text style={styles.label}>Tipo de meta</Text>
         <View style={styles.row}>
-          <TouchableOpacity onPress={() => setTipo("coroas")} style={[styles.choice, tipo === "coroas" && styles.choiceActive]}>
-            <Text style={styles.choiceText}>Coroas</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => setTipo("dias")} style={[styles.choice, tipo === "dias" && styles.choiceActive]}>
-            <Text style={styles.choiceText}>Dias (streak)</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => setTipo("novena")} style={[styles.choice, tipo === "novena" && styles.choiceActive]}>
-            <Text style={styles.choiceText}>Novena</Text>
-          </TouchableOpacity>
+          {TIPOS.map((t) => (
+            <TouchableOpacity
+              key={t.id}
+              onPress={() => setTipo(t.id)}
+              style={[styles.choice, tipo === t.id && styles.choiceActive]}
+            >
+              <Text
+                style={[
+                  styles.choiceText,
+                  tipo === t.id && styles.choiceTextActive,
+                ]}
+              >
+                {t.label}
+              </Text>
+            </TouchableOpacity>
+          ))}
         </View>
 
+        <Text style={styles.label}>Objetivo</Text>
         <TextInput
           style={styles.input}
           keyboardType="number-pad"
           value={objetivo}
           onChangeText={setObjetivo}
-          placeholder="Objetivo (ex: 10)"
-          placeholderTextColor="#ddd"
+          placeholder="Ex: 10"
+          placeholderTextColor={COLORS.textoSecundario}
         />
 
+        <Text style={styles.label}>Título (opcional)</Text>
         <TextInput
           style={styles.input}
           value={titulo}
           onChangeText={setTitulo}
-          placeholder="Título da meta (opcional)"
-          placeholderTextColor="#ddd"
+          placeholder="Ex: Novena pela família"
+          placeholderTextColor={COLORS.textoSecundario}
         />
 
-        <TouchableOpacity style={styles.button} onPress={criar}>
-          <Text style={styles.buttonText}>Criar Meta</Text>
-        </TouchableOpacity>
-      </View>
+        <View style={styles.buttonWrapper}>
+          <AppButton label="Criar meta" mode="primary" onPress={criar} />
+        </View>
+      </ScrollView>
     </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex:1, paddingHorizontal:20 },
-  title: { color:"#fff", fontSize:24, fontWeight:"bold", textAlign:"center", marginBottom:16 },
-  row: { flexDirection:"row", justifyContent:"space-between", marginBottom:12 },
-  choice: { padding:10, borderRadius:8, backgroundColor:"rgba(255,255,255,0.06)", flex:1, marginHorizontal:4, alignItems:"center" },
-  choiceActive: { backgroundColor:"#E2C878" },
-  choiceText: { color:"#fff", fontWeight:"600" },
-  input: { backgroundColor:"rgba(255,255,255,0.04)", color:"#fff", padding:12, borderRadius:8, marginTop:12 },
-  button: { backgroundColor:"#4B1C56", padding:14, borderRadius:10, marginTop:20, alignItems:"center" },
-  buttonText: { color:"#fff", fontWeight:"bold", fontSize:16 }
+  container: {
+    paddingHorizontal: SPACING.md + 4,
+    paddingBottom: SPACING.lg,
+  },
+
+  title: {
+    fontFamily: FONTS.title,
+    fontSize: 30,
+    color: COLORS.textoClaro,
+    marginBottom: 2,
+  },
+
+  subtitle: {
+    fontSize: 14,
+    color: COLORS.textoSecundario,
+    marginBottom: SPACING.lg,
+  },
+
+  label: {
+    fontSize: 12,
+    color: COLORS.textoSecundario,
+    letterSpacing: 0.4,
+    textTransform: "uppercase",
+    marginTop: SPACING.md,
+    marginBottom: SPACING.sm,
+  },
+
+  row: {
+    flexDirection: "row",
+    gap: SPACING.sm,
+  },
+
+  choice: {
+    flex: 1,
+    paddingVertical: SPACING.sm + 2,
+    borderRadius: RADIUS.pill,
+    backgroundColor: COLORS.surface,
+    alignItems: "center",
+  },
+
+  choiceActive: {
+    backgroundColor: COLORS.dourado,
+  },
+
+  choiceText: {
+    color: COLORS.textoClaro,
+    fontSize: 13,
+    fontWeight: "600",
+  },
+
+  choiceTextActive: {
+    color: COLORS.violeta,
+  },
+
+  input: {
+    backgroundColor: COLORS.surface,
+    color: COLORS.textoClaro,
+    fontSize: 16,
+    paddingVertical: SPACING.sm + 4,
+    paddingHorizontal: SPACING.md,
+    borderRadius: RADIUS.card,
+  },
+
+  buttonWrapper: {
+    alignItems: "center",
+    marginTop: SPACING.lg,
+  },
 });
