@@ -3,8 +3,9 @@ export const HISTORIA = {
 
   introducao: `A devoção a Nossa Senhora das Lágrimas está ligada às experiências místicas
 vividas por Irmã Amália de Jesus Flagelado (Amália Aguirre, 1901–1977), religiosa
-espanhola radicada no Brasil e cofundadora, com Dom Francisco de Campos Barreto,
-do Instituto das Missionárias de Jesus Crucificado, em Campinas (SP). Numa série
+espanhola radicada no Brasil e uma das primeiras irmãs do Instituto das
+Missionárias de Jesus Crucificado — fundado em Campinas (SP), em 3 de maio de
+1928, por Dom Francisco de Campos Barreto e Madre Maria Villac. Numa série
 de manifestações espirituais, a Mãe de Deus revelou-lhe a oração da “Coroa das
 Lágrimas”, explicando o valor salvífico de Suas Lágrimas derramadas junto ao
 Seu Filho durante a Paixão.`,
