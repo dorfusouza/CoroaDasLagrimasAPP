@@ -11,11 +11,11 @@ const IS_TEST = __DEV__;
 
 export const BANNER_ID = IS_TEST
   ? TestIds.ADAPTIVE_BANNER
-  : "ca-app-pub-7069143233004245/XXXXXXXXXX"; // ← substitua pelo seu Ad Unit de banner
+  : "ca-app-pub-7069143233004245/1808951470";
 
 export const INTERSTITIAL_ID = IS_TEST
   ? TestIds.INTERSTITIAL
-  : "ca-app-pub-7069143233004245/XXXXXXXXXX"; // ← substitua pelo seu Ad Unit de intersticial
+  : "ca-app-pub-7069143233004245/8318519506";
 
 // ─────────────────────────────────────────────
 // Inicializar SDK (chamar uma vez no boot)
