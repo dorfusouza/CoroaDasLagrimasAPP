@@ -15,7 +15,11 @@
       "expo-dev-client"
     ],
     "android": {
-      "package": "com.dorfusouza.coroadaslagrimas"
+      "package": "com.dorfusouza.coroadaslagrimas",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon-foreground.png",
+        "backgroundColor": "#23001C"
+      }
     },
     "extra": {
       "eas": {

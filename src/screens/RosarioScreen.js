@@ -9,6 +9,7 @@ import {
   Share,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import GradientBackground from "../components/GradientBackground";
 import Rosary from "../components/Rosary";
@@ -20,7 +21,27 @@ import { registrarProgressoMetaAoFinalizar } from "../utils/metas";
 import { gerarSequencia } from "../data/oracoes";
 import { loadInterstitial } from "../utils/ads";
 
+import { COLORS } from "../theme";
 import styles from "./RosarioScreen.styles";
+
+const TIPO_LABEL = {
+  oferecimento: "Oferecimento",
+  "conta-maior": "Conta maior",
+  "conta-menor": "Conta menor",
+  "conta-final": "Conta final",
+  oremos: "Oremos",
+  jaculatoria: "Jaculatória",
+};
+
+function subtitulo(etapa) {
+  if (etapa.tipo === "conta-maior") return `${etapa.grupo}º grupo de 7`;
+  if (etapa.tipo === "conta-menor")
+    return `${etapa.grupo}º grupo · conta ${etapa.ordem} de 7`;
+  if (etapa.tipo === "conta-final") return `Conclusão · conta ${etapa.ordem} de 3`;
+  if (etapa.tipo === "oremos") return "Oração final";
+  if (etapa.tipo === "jaculatoria") return "Jaculatória final";
+  return "Início da Coroa";
+}
 
 export default function RosarioScreen({ navigation }) {
   const seq = gerarSequencia();
@@ -35,20 +56,12 @@ export default function RosarioScreen({ navigation }) {
 
   const etapa = seq[index];
   const totalCircleBeads = 56;
-  const angleStep = (2 * Math.PI) / totalCircleBeads;
 
   // animações
-  const fade = useRef(new Animated.Value(1)).current;
   const scale = useRef(new Animated.Value(1)).current;
 
   function avancar() {
-    if (etapa.tipo === "jaculatoria" && etapa.face === 2) {
-      Animated.sequence([
-        Animated.timing(fade, { toValue: 0, duration: 300, useNativeDriver: true }),
-        Animated.timing(fade, { toValue: 1, duration: 300, useNativeDriver: true }),
-      ]).start(() => next());
-    } else next();
-
+    next();
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
   }
 
@@ -89,36 +102,6 @@ export default function RosarioScreen({ navigation }) {
   function pressOut() {
     Animated.spring(scale, { toValue: 1, friction: 4, useNativeDriver: true }).start();
   }
-
-  // render circle beads array (positions) — devolve elementos para Rosary
-  const renderCircleItems = () => {
-    const items = [];
-    for (let i = 0; i < totalCircleBeads; i++) {
-      const offset = Math.PI / 2;
-      const x = Math.cos(-i * angleStep + offset) * 120;
-      const y = Math.sin(-i * angleStep + offset) * 120;
-
-      const isActive = index > i || index > totalCircleBeads;
-      const isMajor = i % 8 === 0;
-
-      items.push(
-        <View
-          key={i}
-          style={[
-            styles.bead,
-            isMajor ? styles.bigBead : styles.smallBead,
-            isActive ? styles.active : styles.inactive,
-            {
-              position: "absolute",
-              top: 130 + y,
-              left: 130 + x,
-            },
-          ]}
-        />
-      );
-    }
-    return items;
-  };
 
   return (
     <View style={{ flex: 1 }}>
@@ -187,14 +170,13 @@ export default function RosarioScreen({ navigation }) {
             index={index}
             etapa={etapa}
             totalCircleBeads={totalCircleBeads}
-            fade={fade}
-            renderItems={renderCircleItems}
           />
         </View>
 
         {/* TEXTO NO TOPO (scroll apenas do texto) */}
         <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-          <Text style={styles.title}>{etapa.tipo.toUpperCase()}</Text>
+          <Text style={styles.title}>{TIPO_LABEL[etapa.tipo] || etapa.tipo}</Text>
+          <Text style={styles.subtitle}>{subtitulo(etapa)}</Text>
           <Text style={styles.oracao}>{etapa.texto}</Text>
         </ScrollView>
 
@@ -207,7 +189,11 @@ export default function RosarioScreen({ navigation }) {
               onPress={voltar}
               style={[styles.baseButton, styles.smallBtn]}
             >
-              <Text style={styles.smallText}>◀</Text>
+              <MaterialCommunityIcons
+                name="chevron-left"
+                size={30}
+                color={COLORS.branco}
+              />
             </TouchableOpacity>
           </Animated.View>
 
@@ -218,7 +204,11 @@ export default function RosarioScreen({ navigation }) {
               onPress={avancar}
               style={[styles.baseButton, styles.bigBtn]}
             >
-              <Text style={styles.bigText}>▶</Text>
+              <MaterialCommunityIcons
+                name="chevron-right"
+                size={32}
+                color={COLORS.violeta}
+              />
             </TouchableOpacity>
           </Animated.View>
         </View>

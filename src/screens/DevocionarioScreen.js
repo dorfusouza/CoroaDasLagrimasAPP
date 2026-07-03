@@ -33,13 +33,10 @@ export default function DevocionarioScreen({ navigation }) {
         ),
     },
     {
-      titulo: "Comprar a Coroa das Lágrimas (terço)",
+      titulo: "Adquira sua Coroa das Lágrimas",
       icone: "cart-outline",
-      // TODO: substituir pelo link definitivo da Shopee
       onPress: () =>
-        Linking.openURL(
-          "https://shopee.com.br/search?keyword=coroa%20das%20l%C3%A1grimas%20ter%C3%A7o"
-        ),
+        Linking.openURL("https://shopee.com.br/shop/570569248"),
     },
     {
       titulo: "Rezar a Coroa das Lágrimas",

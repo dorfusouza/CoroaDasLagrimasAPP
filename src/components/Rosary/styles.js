@@ -3,53 +3,55 @@ import { COLORS } from "../../theme/colors";
 
 export default StyleSheet.create({
   container: {
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 20,
+    width: 264,
+    height: 440,
+    alignSelf: "center",
+    marginBottom: 8,
   },
 
-  circleContainer: {
-    width: 260,
-    height: 260,
-    position: "relative",
-  },
-
-  bead: {
-    borderRadius: 999,
-  },
-
-  bigBead: {
-    width: 22,
-    height: 22,
-  },
-
-  smallBead: {
-    width: 16,
-    height: 16,
-  },
-
-  active: {
-    backgroundColor: COLORS.contaAtiva,
+  beadDone: {
+    backgroundColor: COLORS.dourado,
     borderWidth: 1,
-    borderColor: COLORS.contaAtivaBorda,
-    shadowColor: COLORS.contaAtiva,
-    shadowOpacity: 0.8,
-    shadowRadius: 6,
+    borderColor: COLORS.douradoEscuro,
   },
 
-  inactive: {
-    backgroundColor: COLORS.contaInativa,
-    opacity: 0.8,
+  beadCurrent: {
+    backgroundColor: "#F0DFA8",
+    borderWidth: 1.5,
+    borderColor: "#FFFFFF",
+  },
+
+  beadTodo: {
+    backgroundColor: "rgba(255,255,255,0.14)",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.20)",
+  },
+
+  beadTodoMajor: {
+    borderColor: COLORS.douradoBordaSuave,
+  },
+
+  halo: {
+    position: "absolute",
+    backgroundColor: COLORS.dourado,
+  },
+
+  pendant: {
+    position: "absolute",
+    top: 254,
+    width: "100%",
+    alignItems: "center",
   },
 
   finalBeads: {
-    marginTop: 10,
+    alignItems: "center",
+    gap: 6,
+    marginBottom: 8,
   },
 
   medalha: {
-    width: 85,
-    height: 110,
+    width: 84,
+    height: 108,
     resizeMode: "contain",
-    marginTop: 4,
   },
 });

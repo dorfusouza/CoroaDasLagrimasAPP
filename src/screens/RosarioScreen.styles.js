@@ -1,53 +1,11 @@
 import { StyleSheet } from "react-native";
-import { COLORS, SPACING } from "../theme";
+import { COLORS, SPACING, FONTS } from "../theme";
 
 export default StyleSheet.create({
   /* GRADIENT (managed by GradientBackground) */
   coroaWrapper: {
     alignItems: "center",
     marginTop: SPACING.md,
-  },
-
-  /* COROA (os estilos das contas também usados pelo Rosary) */
-  bead: {
-    borderRadius: 999,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  bigBead: {
-    width: 22,
-    aspectRatio: 1,
-  },
-
-  smallBead: {
-    width: 16,
-    height: 16,
-  },
-
-  active: {
-    backgroundColor: COLORS.contaAtiva,
-    borderWidth: 1,
-    borderColor: COLORS.contaAtivaBorda,
-    shadowColor: COLORS.contaAtiva,
-    shadowOpacity: 0.8,
-    shadowRadius: 6,
-  },
-
-  inactive: {
-    backgroundColor: COLORS.contaInativa,
-    opacity: 0.8,
-  },
-
-  finalBeads: {
-    marginTop: 10,
-  },
-
-  medalha: {
-    width: 85,
-    height: 110,
-    resizeMode: "contain",
-    marginTop: 4,
   },
 
   /* SCROLL DO TEXTO */
@@ -59,12 +17,20 @@ export default StyleSheet.create({
   },
 
   title: {
-    fontSize: 22,
-    fontWeight: "bold",
+    fontFamily: FONTS.title,
+    fontSize: 24,
     color: COLORS.textoClaro,
     textAlign: "center",
-    marginBottom: 6,
-    marginTop: 10,
+    marginTop: 6,
+  },
+
+  subtitle: {
+    fontSize: 13,
+    color: COLORS.textoSecundario,
+    textAlign: "center",
+    letterSpacing: 0.6,
+    marginTop: 2,
+    marginBottom: SPACING.sm,
   },
 
   oracao: {
