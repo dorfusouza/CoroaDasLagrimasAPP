@@ -2,7 +2,7 @@
   "expo": {
     "name": "Coroa das Lágrimas",
     "slug": "coroa-das-lagrimas",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -16,6 +16,7 @@
     ],
     "android": {
       "package": "com.dorfusouza.coroadaslagrimas",
+      "minSdkVersion": 35,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon-foreground.png",
         "backgroundColor": "#23001C"
