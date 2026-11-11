@@ -1,0 +1,80 @@
+{
+  "evento": "Mundo SENAI",
+  "local": "Sesi Agudos",
+  "perguntas": [
+    {
+      "id": "serie",
+      "titulo": "Ano/série",
+      "texto": "Em qual ano você está?",
+      "tipo": "escolha",
+      "obrigatoria": true,
+      "opcoes": [
+        { "id": "6", "rotulo": "6º ano" },
+        { "id": "7", "rotulo": "7º ano" },
+        { "id": "8", "rotulo": "8º ano" },
+        { "id": "9", "rotulo": "9º ano" },
+        { "id": "outro", "rotulo": "Outro" }
+      ]
+    },
+    {
+      "id": "geral",
+      "titulo": "Avaliação geral",
+      "texto": "O que você achou do Mundo SENAI?",
+      "tipo": "escala",
+      "obrigatoria": true,
+      "opcoes": [
+        { "id": "amei", "rotulo": "Amei", "emoji": "😍" },
+        { "id": "gostei", "rotulo": "Gostei", "emoji": "🙂" },
+        { "id": "mais_ou_menos", "rotulo": "Mais ou menos", "emoji": "😐" },
+        { "id": "nao_gostei", "rotulo": "Não gostei", "emoji": "🙁" }
+      ]
+    },
+    {
+      "id": "gostou_mais",
+      "titulo": "O que mais gostou",
+      "texto": "O que você mais gostou?",
+      "tipo": "escolha",
+      "obrigatoria": true,
+      "opcoes": [
+        { "id": "oficinas", "rotulo": "Oficinas e atividades práticas", "emoji": "🛠️" },
+        { "id": "tecnologia", "rotulo": "Tecnologia e robótica", "emoji": "🤖" },
+        { "id": "cursos", "rotulo": "Conhecer os cursos", "emoji": "🎓" },
+        { "id": "monitores", "rotulo": "Monitores e professores", "emoji": "🧑‍🏫" },
+        { "id": "brincadeiras", "rotulo": "Brincadeiras e brindes", "emoji": "🎁" },
+        { "id": "outro", "rotulo": "Outra coisa", "emoji": "⭐" }
+      ]
+    },
+    {
+      "id": "explicacao",
+      "titulo": "Explicações fáceis",
+      "texto": "As explicações foram fáceis de entender?",
+      "tipo": "escolha",
+      "obrigatoria": true,
+      "opcoes": [
+        { "id": "sim", "rotulo": "Sim", "emoji": "👍" },
+        { "id": "mais_ou_menos", "rotulo": "Mais ou menos", "emoji": "🤏" },
+        { "id": "nao", "rotulo": "Não", "emoji": "👎" }
+      ]
+    },
+    {
+      "id": "interesse",
+      "titulo": "Interesse em cursos",
+      "texto": "Você ficou com vontade de conhecer os cursos do SENAI?",
+      "tipo": "escolha",
+      "obrigatoria": true,
+      "opcoes": [
+        { "id": "sim", "rotulo": "Sim!", "emoji": "🚀" },
+        { "id": "talvez", "rotulo": "Talvez", "emoji": "🤔" },
+        { "id": "nao", "rotulo": "Não", "emoji": "🙅" }
+      ]
+    },
+    {
+      "id": "recado",
+      "titulo": "Recado",
+      "texto": "Quer deixar um recado ou uma ideia para o próximo Mundo SENAI? (opcional)",
+      "tipo": "texto",
+      "obrigatoria": false,
+      "maxCaracteres": 300
+    }
+  ]
+}

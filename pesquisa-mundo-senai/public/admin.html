@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Painel - Pesquisa Mundo SENAI</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="painel">
+    <header>
+      <h1>📊 Pesquisa Mundo SENAI</h1>
+      <a class="botao" href="/api/admin/exportar.csv">⬇ Exportar para Excel (CSV)</a>
+    </header>
+    <div class="kpis" id="kpis"></div>
+    <div id="questoes"></div>
+    <div class="bloco"><h3>💬 Recados (últimos 100)</h3><div id="recados"></div></div>
+    <p class="num" id="atualizado" style="text-align:left"></p>
+  </div>
+  <script>
+    const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const fmtDia = (d) => d.split('-').reverse().join('/');
+    async function atualizar() {
+      try {
+        const r = await fetch('/api/admin/resumo', { cache: 'no-store' });
+        const d = await r.json();
+        const dias = Object.entries(d.porDia).sort();
+        document.getElementById('kpis').innerHTML =
+          `<div class="kpi"><b>${d.total}</b><span>respostas no total</span></div>` +
+          dias.map(([dia, n]) => `<div class="kpi"><b>${n}</b><span>respostas em ${fmtDia(dia)}</span></div>`).join('');
+        document.getElementById('questoes').innerHTML = d.questoes.map((q) => {
+          const max = Math.max(1, ...q.opcoes.map((o) => o.total));
+          const soma = q.opcoes.reduce((a, o) => a + o.total, 0) || 1;
+          return `<div class="bloco"><h3>${esc(q.texto)}</h3>` + q.opcoes.map((o) => `
+            <div class="linha"><span>${o.emoji} ${esc(o.rotulo)}</span>
+              <div class="barra"><i style="width:${(o.total / max) * 100}%"></i></div>
+              <span class="num">${o.total} (${Math.round((o.total / soma) * 100)}%)</span></div>`).join('') + '</div>';
+        }).join('');
+        document.getElementById('recados').innerHTML = d.recados.length
+          ? d.recados.map((c) => `<div class="recado">${esc(c.texto)}<small>${fmtDia(c.dia)} às ${c.hora.slice(0, 5)}</small></div>`).join('')
+          : '<p class="num" style="text-align:left">Nenhum recado ainda.</p>';
+        document.getElementById('atualizado').textContent = 'Atualizado às ' + new Date().toLocaleTimeString('pt-BR') + ' (atualiza sozinho a cada 10s)';
+      } catch { document.getElementById('atualizado').textContent = 'Erro ao atualizar. Servidor ligado?'; }
+    }
+    atualizar();
+    setInterval(atualizar, 10000);
+  </script>
+</body>
+</html>

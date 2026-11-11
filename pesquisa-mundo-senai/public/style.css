@@ -1,0 +1,95 @@
+:root {
+  --vermelho: #d0021b;
+  --azul: #003a70;
+  --fundo: #f4f7fb;
+  --card: #ffffff;
+  --texto: #14213d;
+  --suave: #6b7a90;
+  --borda: #d6deea;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
+}
+button { font: inherit; cursor: pointer; }
+
+/* ---------- Quiosque ---------- */
+.tela {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3vh 5vw;
+  text-align: center;
+  gap: 2.2vh;
+  padding-top: 9vh;
+}
+.topo {
+  position: fixed; top: 0; left: 0; right: 0;
+  background: var(--azul); color: #fff;
+  padding: 1.2vh 2vw; font-weight: 700; font-size: clamp(16px, 2vw, 28px);
+  display: flex; justify-content: space-between;
+}
+.topo b { color: #ffd23f; }
+.progresso { height: 10px; background: var(--borda); border-radius: 99px; width: min(700px, 80vw); overflow: hidden; }
+.progresso > i { display: block; height: 100%; background: var(--vermelho); transition: width .3s; }
+h1 { font-size: clamp(32px, 5vw, 72px); margin: 0; color: var(--azul); }
+h2 { font-size: clamp(26px, 3.6vw, 52px); margin: 0; max-width: 1100px; }
+.sub { font-size: clamp(18px, 2.2vw, 32px); color: var(--suave); }
+
+.grade { display: flex; flex-wrap: wrap; gap: 1.6vw; justify-content: center; max-width: 1200px; }
+.opcao {
+  background: var(--card);
+  border: 4px solid var(--borda);
+  border-radius: 24px;
+  padding: 1.6vh 1.5vw;
+  min-width: 14vw;
+  flex: 0 1 calc(33% - 2vw);
+  display: flex; flex-direction: column; align-items: center; gap: 1vh;
+  font-size: clamp(18px, 2.1vw, 32px); font-weight: 700; color: var(--texto);
+  transition: transform .1s, border-color .1s, background .1s;
+}
+.opcao .emoji { font-size: min(6vw, 10vh); line-height: 1; }
+.opcao:hover, .opcao:focus-visible { border-color: var(--vermelho); transform: scale(1.05); outline: none; background: #fff5f6; }
+.opcao small { color: var(--suave); font-size: .55em; font-weight: 600; }
+
+.botao {
+  background: var(--vermelho); color: #fff; border: 0; border-radius: 99px;
+  padding: 2vh 5vw; font-size: clamp(22px, 2.8vw, 40px); font-weight: 800;
+  box-shadow: 0 6px 0 #8f0013;
+}
+.botao:hover { filter: brightness(1.08); }
+.botao.sec { background: #fff; color: var(--azul); border: 3px solid var(--azul); box-shadow: none; }
+.voltar { position: fixed; left: 2vw; top: 9vh; background: none; border: 0; color: var(--suave); font-size: clamp(18px, 2vw, 28px); }
+.voltar:hover { color: var(--texto); }
+textarea {
+  width: min(900px, 90vw); height: 22vh; font: inherit; font-size: clamp(20px, 2.4vw, 34px);
+  padding: 2vh 2vw; border: 4px solid var(--borda); border-radius: 20px; resize: none;
+}
+textarea:focus { outline: none; border-color: var(--vermelho); }
+.contador { color: var(--suave); font-size: 18px; }
+.erro { color: var(--vermelho); font-weight: 700; font-size: clamp(18px, 2vw, 28px); }
+.grande-emoji { font-size: clamp(90px, 14vw, 200px); }
+
+/* ---------- Painel ---------- */
+.painel { max-width: 1100px; margin: 0 auto; padding: 24px 16px 60px; }
+.painel header { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.painel h1 { font-size: 28px; }
+.painel .botao { font-size: 16px; padding: 10px 22px; box-shadow: none; text-decoration: none; display: inline-block; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 20px; }
+.kpi { background: var(--card); border: 1px solid var(--borda); border-radius: 14px; padding: 16px; }
+.kpi b { display: block; font-size: 36px; color: var(--azul); }
+.kpi span { color: var(--suave); font-size: 14px; }
+.bloco { background: var(--card); border: 1px solid var(--borda); border-radius: 14px; padding: 18px; margin-bottom: 16px; }
+.bloco h3 { margin: 0 0 12px; font-size: 18px; }
+.linha { display: grid; grid-template-columns: minmax(130px, 260px) 1fr 90px; gap: 10px; align-items: center; margin: 8px 0; font-size: 15px; }
+.barra { background: #e8eef6; border-radius: 99px; height: 18px; overflow: hidden; }
+.barra > i { display: block; height: 100%; background: var(--azul); border-radius: 99px; transition: width .4s; }
+.num { color: var(--suave); font-variant-numeric: tabular-nums; text-align: right; }
+.recado { border-top: 1px solid var(--borda); padding: 10px 0; }
+.recado small { color: var(--suave); display: block; }
+@media (max-width: 600px) { .linha { grid-template-columns: 1fr; gap: 2px; } .num { text-align: left; } }
